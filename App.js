@@ -5,8 +5,8 @@ import RobotoMedium500 from "./src/fonts/Roboto-Medium-500.ttf";
 import RobotoBold700 from "./src/fonts/Roboto-Bold-700.ttf";
 import { useFonts } from "expo-font";
 
-import LoginScreen from "./src/LoginScreen";
-import RegistrationScreen from "./src/RegistrationScreen";
+import LoginScreen from "./src/pages/loginScreen/LoginScreen";
+import RegistrationScreen from "./src/pages/registrationScreen/RegistrationScreen";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -23,7 +23,7 @@ export default function App() {
 		<>
 			<StatusBar />
 			<LoginScreen></LoginScreen>
-			<RegistrationScreen></RegistrationScreen>
+			{/* <RegistrationScreen></RegistrationScreen> */}
 		</>
 	);
 }

@@ -3,24 +3,6 @@ import { StyleSheet } from "react-native";
 const regImgHeight = 120;
 
 export const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "flex-end",
-		alignItems: "center",
-	},
-
-	imgBg: {
-		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center",
-		position: "absolute",
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
-		width: "100%",
-	},
-
 	form: {
 		width: "100%",
 		paddingLeft: 16,
@@ -54,10 +36,22 @@ export const styles = StyleSheet.create({
 	},
 
 	regAddImgBtn: {
-		top: 20,
-		left: regImgHeight / 2,
+		position: "absolute",
+		top: 0,
+
+		transform: [{ translateX: regImgHeight / 2 - 12.5 }],
+
 		width: 25,
 		height: 25,
+	},
+
+	formTitleReg: {
+		marginTop: 32,
+		marginBottom: 32,
+		color: "#212121",
+		fontFamily: "RobotoMedium500",
+		fontSize: 30,
+		letterSpacing: 0.3,
 	},
 
 	formTitle: {
@@ -114,13 +108,5 @@ export const styles = StyleSheet.create({
 		width: "100%",
 		marginBottom: 16,
 		marginTop: 26,
-	},
-
-	loginBtn: {
-		marginBottom: 44,
-		color: "#1B4371",
-		textAlign: "center",
-		fontFamily: "RobotoRegular400",
-		fontSize: 16,
 	},
 });
