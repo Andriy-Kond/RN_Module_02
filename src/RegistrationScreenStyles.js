@@ -92,6 +92,11 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 
+	inputFocused: {
+		backgroundColor: "#FFF",
+		borderColor: "#FF6C00",
+	},
+
 	passwordInputContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
