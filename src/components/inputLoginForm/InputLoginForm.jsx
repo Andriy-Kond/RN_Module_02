@@ -1,5 +1,11 @@
-import React, { useState, useReducer } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useReducer } from "react";
+import {
+	Text,
+	View,
+	TextInput,
+	TouchableOpacity,
+	Keyboard,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./InputLoginFormStyles.js";
@@ -26,7 +32,30 @@ const inputsReducer = (state, action) => {
 	}
 };
 
-const InputLoginForm = ({ keyboardVisible, mainBtnText, secondBtnText }) => {
+const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
+	const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+	useEffect(() => {
+		const keyboardDidShowListener = Keyboard.addListener(
+			"keyboardDidShow",
+			() => {
+				setKeyboardVisible(true);
+			}
+		);
+
+		const keyboardDidHideListener = Keyboard.addListener(
+			"keyboardDidHide",
+			() => {
+				setKeyboardVisible(false);
+			}
+		);
+
+		return () => {
+			keyboardDidShowListener.remove();
+			keyboardDidHideListener.remove();
+		};
+	}, []);
+
 	const navigation = useNavigation();
 
 	const [email, setEmail] = useState("");

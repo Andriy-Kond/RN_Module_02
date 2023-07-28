@@ -1,5 +1,12 @@
-import React, { useState, useReducer } from "react";
-import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useReducer } from "react";
+import {
+	Text,
+	View,
+	Image,
+	TextInput,
+	TouchableOpacity,
+	Keyboard,
+} from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 
@@ -29,7 +36,29 @@ const inputsReducer = (state, action) => {
 	}
 };
 
-const InputRegisterForm = ({ keyboardVisible, mainBtnText, secondBtnText }) => {
+const InputRegisterForm = ({ mainBtnText, secondBtnText }) => {
+	const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+	useEffect(() => {
+		const keyboardDidShowListener = Keyboard.addListener(
+			"keyboardDidShow",
+			() => {
+				setKeyboardVisible(true);
+			}
+		);
+
+		const keyboardDidHideListener = Keyboard.addListener(
+			"keyboardDidHide",
+			() => {
+				setKeyboardVisible(false);
+			}
+		);
+
+		return () => {
+			keyboardDidShowListener.remove();
+			keyboardDidHideListener.remove();
+		};
+	}, []);
 	const navigation = useNavigation();
 
 	const [login, setLogin] = useState("");
