@@ -89,11 +89,12 @@ const InputForm = ({
 				style={[styles.inputsWrapper, keyboardVisible && { marginBottom: 16 }]}>
 				{!isRegistered && (
 					<TextInput
+						value={login}
+						autoFocus={!isRegistered ? true : false}
 						style={[
 							styles.input,
 							inputsState.inputs["loginInput"] ? styles.inputFocused : null,
 						]}
-						value={login}
 						placeholder={"Логін"}
 						placeholderTextColor={"#BDBDBD"}
 						onChangeText={(text) => setLogin(text)}
@@ -103,11 +104,12 @@ const InputForm = ({
 				)}
 
 				<TextInput
+					value={email}
+					autoFocus={isRegistered ? true : false}
 					style={[
 						styles.input,
 						inputsState.inputs["emailInput"] ? styles.inputFocused : null,
 					]}
-					value={email}
 					placeholder={"Адреса електронної пошти"}
 					placeholderTextColor={"#BDBDBD"}
 					onChangeText={(text) => setEmail(text)}
@@ -122,9 +124,9 @@ const InputForm = ({
 						inputsState.inputs["passwordInput"] ? styles.inputFocused : null,
 					]}>
 					<TextInput
-						style={styles.passwordInput}
 						value={password}
 						placeholder={"Пароль"}
+						style={styles.passwordInput}
 						placeholderTextColor={"#BDBDBD"}
 						onChangeText={(text) => setPassword(text)}
 						secureTextEntry={!showPassword}
