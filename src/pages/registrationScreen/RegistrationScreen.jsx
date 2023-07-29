@@ -10,7 +10,7 @@ import {
 import { styles } from "./RegistrationScreenStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import InputRegisterForm from "../../components/inputRegisterForm/InputRegisterForm.jsx";
+import InputRegisterForm from "../../components/registerForm/RegisterForm.jsx";
 
 const RegistrationScreen = () => {
 	const mainBtnText = "Зареєструватися";

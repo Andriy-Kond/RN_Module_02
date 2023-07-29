@@ -10,7 +10,7 @@ import {
 import { styles } from "./LoginScreenStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import InputLoginForm from "../../components/inputLoginForm/InputLoginForm.jsx";
+import InputLoginForm from "../../components/loginForm/LoginForm.jsx";
 
 const LoginScreen = () => {
 	const mainBtnText = "Увійти";

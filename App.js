@@ -37,12 +37,18 @@ export default function App() {
 
 				<MainStack.Navigator
 					initialRouteName="Login"
-					screenOptions={{ headerShown: false }}>
+					// screenOptions={{ headerShown: false }} // відключає усі заголовки
+				>
 					<MainStack.Screen
 						name="Registration"
 						component={RegistrationScreen}
+						options={({ title: "Registration screen" }, { headerShown: false })}
 					/>
-					<MainStack.Screen name="Login" component={LoginScreen} />
+					<MainStack.Screen
+						name="Login"
+						component={LoginScreen}
+						options={({ title: "Login screen" }, { headerShown: false })}
+					/>
 					<MainStack.Screen name="PostScreen" component={PostScreen} />
 				</MainStack.Navigator>
 

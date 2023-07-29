@@ -2,16 +2,20 @@ import React, { useState, useEffect, useReducer } from "react";
 import {
 	Text,
 	View,
+	Image,
 	TextInput,
 	TouchableOpacity,
 	Keyboard,
 } from "react-native";
+import Svg, { Circle, Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 
-import { styles } from "./InputLoginFormStyles.js";
+import { styles } from "./RegisterFormStyles.js";
 
 import BtnMain from "../BtnMain.jsx";
 import BtnSecond from "../BtnSecond.jsx";
+
+import regEmptyImg from "../../img/reg_rectangle_grey.png";
 
 const inputsInitialState = {
 	inputs: {},
@@ -32,7 +36,7 @@ const inputsReducer = (state, action) => {
 	}
 };
 
-const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
+const LoginForm = ({ mainBtnText, secondBtnText }) => {
 	const [keyboardVisible, setKeyboardVisible] = useState(false);
 
 	useEffect(() => {
@@ -55,9 +59,9 @@ const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
 			keyboardDidHideListener.remove();
 		};
 	}, []);
-
 	const navigation = useNavigation();
 
+	const [login, setLogin] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -73,13 +77,49 @@ const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
 
 	return (
 		<View style={[styles.form]}>
-			<Text style={styles.formTitle}>Увійти</Text>
+			<View style={styles.regImageContainer}>
+				<Image style={styles.regEmptyImg} source={regEmptyImg}></Image>
+
+				<TouchableOpacity
+					style={[styles.regAddImgBtn]}
+					onPress={() => console.log("Button regAddImgBtn pressed")}>
+					<Svg
+						width="25"
+						height="25"
+						viewBox="0 0 25 25"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg">
+						<Circle cx="12.5" cy="12.5" r="12" fill="#fff" stroke="#FF6C00" />
+						<Path
+							fillRule="evenodd"
+							clipRule="evenodd"
+							d="M13 6H12V12H6V13H12V19H13V13H19V12H13V6Z"
+							fill="#FF6C00"
+						/>
+					</Svg>
+				</TouchableOpacity>
+			</View>
+
+			<Text style={styles.formTitle}>Реєстрація</Text>
 
 			<View
 				style={[styles.inputsWrapper, keyboardVisible && { marginBottom: 16 }]}>
 				<TextInput
-					value={email}
+					value={login}
 					autoFocus
+					style={[
+						styles.input,
+						inputsState.inputs["loginInput"] ? styles.inputFocused : null,
+					]}
+					placeholder={"Логін"}
+					placeholderTextColor={"#BDBDBD"}
+					onChangeText={(text) => setLogin(text)}
+					onFocus={() => onFocusChange("loginInput", true)}
+					onBlur={() => onFocusChange("loginInput", false)}
+				/>
+
+				<TextInput
+					value={email}
 					keyboardType="email-address"
 					style={[
 						styles.input,
@@ -126,7 +166,9 @@ const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
 
 					<BtnSecond
 						title={secondBtnText}
-						onPress={() => navigation.navigate("Registration")}
+						onPress={() => {
+							navigation.navigate("Login");
+						}}
 					/>
 				</>
 			)}
@@ -134,4 +176,4 @@ const InputLoginForm = ({ mainBtnText, secondBtnText }) => {
 	);
 };
 
-export default InputLoginForm;
+export default LoginForm;
