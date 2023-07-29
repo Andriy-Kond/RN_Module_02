@@ -15,6 +15,7 @@ const inputsInitialState = {
 };
 
 const LoginForm = ({ mainBtnText, secondBtnText }) => {
+	// Navigation
 	const navigation = useNavigation();
 
 	const [email, setEmail] = useState("");
@@ -30,7 +31,8 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 		setShowPassword(!showPassword);
 	};
 
-	const keyboardVisible = useKeyboardVisibility(); // custom hook for keyboard visibility control
+	// custom hook for keyboard visibility control
+	const keyboardVisible = useKeyboardVisibility();
 
 	return (
 		<View style={[styles.form]}>
@@ -82,7 +84,7 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 					<BtnMain
 						title={mainBtnText}
 						buttonStyle={styles.mainBtn}
-						onPress={() => {}}
+						onPress={() => navigation.navigate("Home", { screen: "Posts" })}
 					/>
 
 					<BtnSecond

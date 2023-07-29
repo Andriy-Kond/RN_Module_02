@@ -13,9 +13,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import LoginScreen from "./src/pages/loginScreen/LoginScreen";
-import RegistrationScreen from "./src/pages/registrationScreen/RegistrationScreen";
-import PostScreen from "./src/pages/postScreen/PostScreen";
+import LoginScreen from "./src/pages/login/Login";
+import RegistrationScreen from "./src/pages/registration/Registration";
+import PostScreen from "./src/pages/post/Post";
 
 const MainStack = createStackNavigator(); // вказує на групу навігаторів
 
@@ -49,12 +49,8 @@ export default function App() {
 						component={LoginScreen}
 						options={({ title: "Login screen" }, { headerShown: false })}
 					/>
-					<MainStack.Screen name="PostScreen" component={PostScreen} />
+					<MainStack.Screen name="Post" component={PostScreen} />
 				</MainStack.Navigator>
-
-				{/* <LoginScreen></LoginScreen> */}
-				{/* <RegistrationScreen></RegistrationScreen> */}
-				{/* <PostScreen></PostScreen> */}
 			</SafeAreaView>
 		</NavigationContainer>
 	);

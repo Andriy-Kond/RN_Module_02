@@ -6,9 +6,9 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 
-import { styles } from "./CreatePostsScreenStyles";
+import { styles } from "./CreatePostsStyles";
 
-export default function CreatePostsScreen() {
+export default function CreatePosts() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,9 +16,7 @@ export default function CreatePostsScreen() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>
-							I am CreatePostsScreen
-						</Text>
+						<Text style={styles.passwordToggleText}>I am CreatePosts</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>

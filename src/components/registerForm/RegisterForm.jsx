@@ -32,8 +32,8 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
-
-	const keyboardVisible = useKeyboardVisibility(); // custom hook for keyboard visibility control
+	// custom hook for keyboard visibility control
+	const keyboardVisible = useKeyboardVisibility();
 
 	return (
 		<View style={[styles.form]}>

@@ -1,25 +1,16 @@
-import {
-	Keyboard,
-	KeyboardAvoidingView,
-	ScrollView,
-	Text,
-	TouchableWithoutFeedback,
-} from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const HomeStack = createStackNavigator();
 
 import { styles } from "./HomeStyles";
 
-export default function Home() {
+export default function HomeStack() {
 	return (
 		<>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<ScrollView contentContainerStyle={styles.scrollContainer}>
-					<KeyboardAvoidingView
-						// behavior={Platform.OS === "ios" ? "padding" : "height"}
-						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am Home</Text>
-					</KeyboardAvoidingView>
-				</ScrollView>
-			</TouchableWithoutFeedback>
+			<HomeStack.Navigator>
+				<HomeStack.Screen name="Home" component={Home} />
+				<HomeStack.Screen name="Posts" component={Post} />
+			</HomeStack.Navigator>
 		</>
 	);
 }

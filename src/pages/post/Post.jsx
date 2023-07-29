@@ -6,9 +6,9 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 
-import { styles } from "./PostScreenStyles";
+import { styles } from "./PostStyles";
 
-export default function PostScreen() {
+export default function Post() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,7 +16,7 @@ export default function PostScreen() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am PostScreen</Text>
+						<Text style={styles.passwordToggleText}>I am Post</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>

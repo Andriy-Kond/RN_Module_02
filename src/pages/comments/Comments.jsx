@@ -6,9 +6,9 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 
-import { styles } from "./MapScreenStyles";
+import { styles } from "./CommentsStyles";
 
-export default function MapScreen() {
+export default function Comments() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,7 +16,7 @@ export default function MapScreen() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am MapScreen</Text>
+						<Text style={styles.passwordToggleText}>I am Comments</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>

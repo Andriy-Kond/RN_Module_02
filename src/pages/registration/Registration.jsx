@@ -7,32 +7,32 @@ import {
 	ScrollView,
 } from "react-native";
 
-import { styles } from "./LoginScreenStyles.js";
+import { styles } from "./RegistrationStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import InputLoginForm from "../../components/loginForm/LoginForm.jsx";
+import InputRegisterForm from "../../components/registerForm/RegisterForm.jsx";
 
-const LoginScreen = () => {
-	const mainBtnText = "Увійти";
-	const secondBtnText = "Немає акаунту? Зареєструватися";
+export default function Registration() {
+	const mainBtnText = "Зареєструватися";
+	const secondBtnText = "Вже є акаунт? Увійти";
 
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				{/* Обгортка для контролю за клавіатурою */}
 				<ScrollView contentContainerStyle={styles.scrollContainer}>
+					{/* Обгортка для контролю за клавіатурою */}
 					<KeyboardAvoidingView
-						style={styles.container}
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
-					>
+						style={styles.container}>
 						{/* фонове зображення */}
 						<Image
 							source={bgPhotoImage} // посилання на фонове зображення
 							style={styles.imgBg}
 							resizeMode="cover"
 						/>
+
 						{/* Форма з інпутами */}
-						<InputLoginForm
+						<InputRegisterForm
 							mainBtnText={mainBtnText}
 							secondBtnText={secondBtnText}
 						/>
@@ -41,6 +41,4 @@ const LoginScreen = () => {
 			</TouchableWithoutFeedback>
 		</>
 	);
-};
-
-export default LoginScreen;
+}

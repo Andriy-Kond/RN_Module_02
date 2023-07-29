@@ -6,9 +6,9 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 
-import { styles } from "./CommentsScreenStyles";
+import { styles } from "./ProfileStyles";
 
-export default function CommentsScreen() {
+export default function Profile() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,7 +16,7 @@ export default function CommentsScreen() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am CommentsScreen</Text>
+						<Text style={styles.passwordToggleText}>I am Profile</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>

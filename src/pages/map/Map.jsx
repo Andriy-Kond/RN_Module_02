@@ -6,9 +6,9 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 
-import { styles } from "./ProfileScreenStyles";
+import { styles } from "./MapStyles";
 
-export default function ProfileScreen() {
+export default function Map() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,7 +16,7 @@ export default function ProfileScreen() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am ProfileScreen</Text>
+						<Text style={styles.passwordToggleText}>I am Map</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>
