@@ -1,61 +1,20 @@
-import React, { useState, useEffect, useReducer } from "react";
-import {
-	Text,
-	View,
-	TextInput,
-	TouchableOpacity,
-	Keyboard,
-} from "react-native";
+import React, { useState, useReducer } from "react";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./LoginFormStyles.js";
 
 import BtnMain from "../BtnMain.jsx";
 import BtnSecond from "../BtnSecond.jsx";
+import { inputsReducer } from "../../utils/inputsReducer.js";
+
+import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
 
 const inputsInitialState = {
 	inputs: {},
 };
 
-const inputsReducer = (state, action) => {
-	switch (action.type) {
-		case "FOCUS_CHANGE":
-			return {
-				...state,
-				inputs: {
-					...state.inputs,
-					[action.name]: action.isFocused,
-				},
-			};
-		default:
-			return state;
-	}
-};
-
 const LoginForm = ({ mainBtnText, secondBtnText }) => {
-	const [keyboardVisible, setKeyboardVisible] = useState(false);
-
-	useEffect(() => {
-		const keyboardDidShowListener = Keyboard.addListener(
-			"keyboardDidShow",
-			() => {
-				setKeyboardVisible(true);
-			}
-		);
-
-		const keyboardDidHideListener = Keyboard.addListener(
-			"keyboardDidHide",
-			() => {
-				setKeyboardVisible(false);
-			}
-		);
-
-		return () => {
-			keyboardDidShowListener.remove();
-			keyboardDidHideListener.remove();
-		};
-	}, []);
-
 	const navigation = useNavigation();
 
 	const [email, setEmail] = useState("");
@@ -70,6 +29,8 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
+
+	const keyboardVisible = useKeyboardVisibility(); // custom hook for keyboard visibility control
 
 	return (
 		<View style={[styles.form]}>
