@@ -1,9 +1,25 @@
-import { Text } from "react-native";
+import {
+	Keyboard,
+	KeyboardAvoidingView,
+	ScrollView,
+	Text,
+	TouchableWithoutFeedback,
+} from "react-native";
+
+import { styles } from "./HomeStyles";
 
 export default function Home() {
 	return (
 		<>
-			<Text>Це CreatePostsScreen</Text>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<ScrollView contentContainerStyle={styles.scrollContainer}>
+					<KeyboardAvoidingView
+						// behavior={Platform.OS === "ios" ? "padding" : "height"}
+						style={styles.container}>
+						<Text style={styles.passwordToggleText}>I am Home</Text>
+					</KeyboardAvoidingView>
+				</ScrollView>
+			</TouchableWithoutFeedback>
 		</>
 	);
 }
