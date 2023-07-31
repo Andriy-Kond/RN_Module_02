@@ -1,13 +1,13 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const BtnMain = ({ title, onPress, buttonStyle }) => {
+export function BtnMain({ title, onPress, buttonStyle }) {
 	return (
 		<TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
 			<Text style={styles.buttonText}>{title}</Text>
 		</TouchableOpacity>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	button: {
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 });
-
-export default BtnMain;

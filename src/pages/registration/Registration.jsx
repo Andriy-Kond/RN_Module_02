@@ -1,16 +1,17 @@
-// import React, { useState, useEffect } from "react";
 import {
 	Image,
+	ImageBackground,
 	KeyboardAvoidingView,
 	Keyboard,
 	TouchableWithoutFeedback,
 	ScrollView,
+	View,
 } from "react-native";
 
 import { styles } from "./RegistrationStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import InputRegisterForm from "../../components/registerForm/RegisterForm.jsx";
+import RegistrationForm from "../../components/registerForm/RegistrationForm.jsx";
 
 export default function Registration() {
 	const mainBtnText = "Зареєструватися";
@@ -20,19 +21,18 @@ export default function Registration() {
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<ScrollView contentContainerStyle={styles.scrollContainer}>
+					{/* фонове зображення */}
+					<Image
+						source={bgPhotoImage} // посилання на фонове зображення
+						style={styles.imgBg}
+						resizeMode="cover"
+					/>
 					{/* Обгортка для контролю за клавіатурою */}
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						{/* фонове зображення */}
-						<Image
-							source={bgPhotoImage} // посилання на фонове зображення
-							style={styles.imgBg}
-							resizeMode="cover"
-						/>
-
 						{/* Форма з інпутами */}
-						<InputRegisterForm
+						<RegistrationForm
 							mainBtnText={mainBtnText}
 							secondBtnText={secondBtnText}
 						/>

@@ -1,44 +1,61 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 
-import { styles } from "./RegisterFormStyles.js";
+import { styles } from "./RegistrationFormStyles.js";
 
-import BtnMain from "../BtnMain.jsx";
-import BtnSecond from "../BtnSecond.jsx";
+import { BtnMain } from "../btns/BtnMain.jsx";
+import { BtnSecond } from "../btns/BtnSecond.jsx";
 
 import regEmptyImg from "../../img/reg_rectangle_grey.png";
-import { inputsReducer } from "../../utils/inputsReducer.js";
-import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
+// import { inputsReducer } from "../../utils/inputsReducer.js";
 
-const inputsInitialState = {
-	inputs: {},
-};
+import { StateContext } from "../../utils/inputsContextContainer";
 
-const LoginForm = ({ mainBtnText, secondBtnText }) => {
+export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 	const navigation = useNavigation();
 
-	const [login, setLogin] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const { inputsState, dispatch } = useContext(StateContext);
+	// console.log("RegistrationForm >> inputsInitialState:", inputsInitialState);
 
-	const [inputsState, dispatch] = useReducer(inputsReducer, inputsInitialState);
+	// const [inputsState, dispatch] = useReducer(inputsReducer, inputsInitialState);
+	// console.log("RegistrationForm >> inputsState:", inputsState);
+
+	const [onFocus, setOnFocus] = useState(false);
+
 	const onFocusChange = (name, isFocused) => {
+		setOnFocus(isFocused);
 		dispatch({ type: "FOCUS_CHANGE", name, isFocused });
+	};
+
+	const setLogin = (login) => {
+		dispatch({ type: "LOGIN_CHANGE", login });
+	};
+
+	const setEmail = (email) => {
+		dispatch({ type: "EMAIL_CHANGE", email });
+	};
+
+	const setPassword = (password) => {
+		dispatch({ type: "PASSWORD_CHANGE", password });
 	};
 
 	const [showPassword, setShowPassword] = useState(false);
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
-	// custom hook for keyboard visibility control
-	const keyboardVisible = useKeyboardVisibility();
+
+	// submit registration
+	const submitRegistration = () => {
+		dispatch({ type: "SUBMIT" });
+		navigation.navigate("Home", { screen: "Posts" });
+	};
 
 	return (
-		<View style={[styles.form]}>
+		<View style={styles.form}>
 			<View style={styles.regImageContainer}>
-				<Image style={styles.regEmptyImg} source={regEmptyImg}></Image>
+				<Image style={styles.regEmptyImg} source={regEmptyImg} />
 
 				<TouchableOpacity
 					style={[styles.regAddImgBtn]}
@@ -62,16 +79,15 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 
 			<Text style={styles.formTitle}>Реєстрація</Text>
 
-			<View
-				style={[styles.inputsWrapper, keyboardVisible && { marginBottom: 16 }]}>
+			<View style={[styles.inputsWrapper, onFocus && { marginBottom: 16 }]}>
 				<TextInput
-					value={login}
+					placeholder={"Логін"}
+					value={inputsState.login}
 					autoFocus
 					style={[
 						styles.input,
 						inputsState.inputs["loginInput"] ? styles.inputFocused : null,
 					]}
-					placeholder={"Логін"}
 					placeholderTextColor={"#BDBDBD"}
 					onChangeText={(text) => setLogin(text)}
 					onFocus={() => onFocusChange("loginInput", true)}
@@ -79,13 +95,13 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 				/>
 
 				<TextInput
-					value={email}
+					placeholder={"Адреса електронної пошти"}
+					value={inputsState.email}
 					keyboardType="email-address"
 					style={[
 						styles.input,
 						inputsState.inputs["emailInput"] ? styles.inputFocused : null,
 					]}
-					placeholder={"Адреса електронної пошти"}
 					placeholderTextColor={"#BDBDBD"}
 					onChangeText={(text) => setEmail(text)}
 					onFocus={() => onFocusChange("emailInput", true)}
@@ -99,8 +115,8 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 						inputsState.inputs["passwordInput"] ? styles.inputFocused : null,
 					]}>
 					<TextInput
-						value={password}
 						placeholder={"Пароль"}
+						value={inputsState.password}
 						style={styles.passwordInput}
 						placeholderTextColor={"#BDBDBD"}
 						onChangeText={(text) => setPassword(text)}
@@ -116,12 +132,12 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 				</View>
 			</View>
 
-			{!keyboardVisible && (
+			{!onFocus && (
 				<>
 					<BtnMain
 						title={mainBtnText}
 						buttonStyle={styles.mainBtn}
-						onPress={() => {}}
+						onPress={() => submitRegistration()}
 					/>
 
 					<BtnSecond
@@ -134,6 +150,4 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 			)}
 		</View>
 	);
-};
-
-export default LoginForm;
+}

@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
 	Keyboard,
 	KeyboardAvoidingView,
@@ -9,6 +10,8 @@ import {
 import { styles } from "./CreatePostsStyles";
 
 export default function CreatePosts() {
+	const navigation = useNavigation();
+
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,7 +19,7 @@ export default function CreatePosts() {
 					<KeyboardAvoidingView
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.container}>
-						<Text style={styles.passwordToggleText}>I am CreatePosts</Text>
+						<Text>I am CreatePosts</Text>
 					</KeyboardAvoidingView>
 				</ScrollView>
 			</TouchableWithoutFeedback>

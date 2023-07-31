@@ -1,29 +1,37 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./LoginFormStyles.js";
 
-import BtnMain from "../BtnMain.jsx";
-import BtnSecond from "../BtnSecond.jsx";
-import { inputsReducer } from "../../utils/inputsReducer.js";
+import { BtnMain } from "../btns/BtnMain.jsx";
+import { BtnSecond } from "../btns/BtnSecond.jsx";
+// import { inputsReducer } from "../../utils/inputsReducer.js";
 
-import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
+import { StateContext } from "../../utils/inputsContextContainer";
 
-const inputsInitialState = {
-	inputs: {},
-};
-
-const LoginForm = ({ mainBtnText, secondBtnText }) => {
-	// Navigation
+export default function LoginForm({ mainBtnText, secondBtnText }) {
 	const navigation = useNavigation();
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const { inputsState, dispatch } = useContext(StateContext);
+	// console.log("LoginForm >> inputsInitialState:", inputsInitialState);
 
-	const [inputsState, dispatch] = useReducer(inputsReducer, inputsInitialState);
+	// const [inputsState, dispatch] = useReducer(inputsReducer, inputsInitialState);
+	// console.log("LoginForm >> inputsState:", inputsState);
+
+	const [onFocus, setOnFocus] = useState(false);
+
 	const onFocusChange = (name, isFocused) => {
+		setOnFocus(isFocused);
 		dispatch({ type: "FOCUS_CHANGE", name, isFocused });
+	};
+
+	const setEmail = (email) => {
+		dispatch({ type: "EMAIL_CHANGE", email });
+	};
+
+	const setPassword = (password) => {
+		dispatch({ type: "PASSWORD_CHANGE", password });
 	};
 
 	const [showPassword, setShowPassword] = useState(false);
@@ -31,24 +39,30 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 		setShowPassword(!showPassword);
 	};
 
-	// custom hook for keyboard visibility control
-	const keyboardVisible = useKeyboardVisibility();
+	// submit login
+	const submitLogin = () => {
+		// логіка перевірки email і пароля
+		// Якщо дані вірні то перехід на HomeScreen
+		dispatch({ type: "SUBMIT", inputsInitialState });
+		navigation.navigate("Home", { screen: "Posts" });
+		// if (email === "example@example.com" && password === "password") {
+		// }
+	};
 
 	return (
 		<View style={[styles.form]}>
 			<Text style={styles.formTitle}>Увійти</Text>
 
-			<View
-				style={[styles.inputsWrapper, keyboardVisible && { marginBottom: 16 }]}>
+			<View style={[styles.inputsWrapper, onFocus && { marginBottom: 16 }]}>
 				<TextInput
-					value={email}
+					placeholder={"Адреса електронної пошти"}
+					value={inputsState.email}
 					autoFocus
 					keyboardType="email-address"
 					style={[
 						styles.input,
 						inputsState.inputs["emailInput"] ? styles.inputFocused : null,
 					]}
-					placeholder={"Адреса електронної пошти"}
 					placeholderTextColor={"#BDBDBD"}
 					onChangeText={(text) => setEmail(text)}
 					onFocus={() => onFocusChange("emailInput", true)}
@@ -62,8 +76,8 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 						inputsState.inputs["passwordInput"] ? styles.inputFocused : null,
 					]}>
 					<TextInput
-						value={password}
 						placeholder={"Пароль"}
+						value={inputsState.password}
 						style={styles.passwordInput}
 						placeholderTextColor={"#BDBDBD"}
 						onChangeText={(text) => setPassword(text)}
@@ -79,12 +93,12 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 				</View>
 			</View>
 
-			{!keyboardVisible && (
+			{!onFocus && (
 				<>
 					<BtnMain
 						title={mainBtnText}
 						buttonStyle={styles.mainBtn}
-						onPress={() => navigation.navigate("Home", { screen: "Posts" })}
+						onPress={() => submitLogin()}
 					/>
 
 					<BtnSecond
@@ -95,6 +109,4 @@ const LoginForm = ({ mainBtnText, secondBtnText }) => {
 			)}
 		</View>
 	);
-};
-
-export default LoginForm;
+}

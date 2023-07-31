@@ -1,4 +1,3 @@
-// import React, { useState, useEffect } from "react";
 import {
 	Image,
 	KeyboardAvoidingView,
@@ -10,7 +9,7 @@ import {
 import { styles } from "./LoginStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import InputLoginForm from "../../components/loginForm/LoginForm.jsx";
+import LoginForm from "../../components/loginForm/LoginForm.jsx";
 
 export default function Login() {
 	const mainBtnText = "Увійти";
@@ -32,7 +31,7 @@ export default function Login() {
 							resizeMode="cover"
 						/>
 						{/* Форма з інпутами */}
-						<InputLoginForm
+						<LoginForm
 							mainBtnText={mainBtnText}
 							secondBtnText={secondBtnText}
 						/>

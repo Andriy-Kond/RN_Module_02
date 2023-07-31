@@ -8,12 +8,7 @@ export const styles = StyleSheet.create({
 	},
 
 	container: {
-		margin: 20,
-		padding: 20,
+		paddingHorizontal: 16,
 		flex: 1,
-	},
-
-	passwordToggleText: {
-		color: "#1B4371",
 	},
 });

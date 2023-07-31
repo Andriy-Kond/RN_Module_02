@@ -3,21 +3,21 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 	scrollContainer: {
 		flexGrow: 1,
-		alignItems: "center",
-		justifyContent: "center",
+		// alignItems: "center",
+		// justifyContent: "center",
 	},
 
 	container: {
 		flex: 1,
 		justifyContent: "flex-end",
-		alignItems: "center",
-		width: "100%",
+		// alignItems: "center",
+		// width: "100%",
 	},
 
 	imgBg: {
 		flex: 1,
 		resizeMode: "cover",
-		justifyContent: "center",
+		// justifyContent: "flex-end",
 		position: "absolute",
 		top: 0,
 		left: 0,
