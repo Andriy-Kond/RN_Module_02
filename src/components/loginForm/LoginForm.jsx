@@ -1,4 +1,4 @@
-import { useState, useContext, useCallback, useRef } from "react";
+import { useState, useContext, useCallback, useRef, useEffect } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
@@ -31,12 +31,18 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 		setShowPassword(!showPassword);
 	};
 
-	const emailInputRef = useRef(null);
-	useFocusEffect(
-		useCallback(() => {
-			emailInputRef.current?.focus();
-		}, [])
-	);
+	// const emailInputRef = useRef(null);
+	// useEffect(() => {
+	// 	if (navigation.isFocused()) {
+	// 		emailInputRef.current?.focus();
+	// 	}
+	// }, [navigation]);
+
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		emailInputRef.current?.focus();
+	// 	}, [])
+	// );
 
 	// submit login
 	const submitLogin = () => {
@@ -58,10 +64,10 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 						isKeyboardOpened && { marginBottom: 16 },
 					]}>
 					<TextInput
-						ref={emailInputRef}
+						// ref={emailInputRef}
 						placeholder={"Адреса електронної пошти"}
 						value={inputsState.email}
-						// autoFocus
+						autoFocus
 						keyboardType="email-address"
 						style={[
 							styles.input,

@@ -37,12 +37,12 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 		setShowPassword(!showPassword);
 	};
 
-	const emailInputRef = useRef(null);
-	useFocusEffect(
-		useCallback(() => {
-			emailInputRef.current?.focus();
-		}, [])
-	);
+	// const emailInputRef = useRef(null);
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		emailInputRef.current?.focus();
+	// 	}, [])
+	// );
 
 	// submit registration
 	const submitRegistration = () => {
@@ -82,7 +82,7 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 						isKeyboardOpened && { marginBottom: 16 },
 					]}>
 					<TextInput
-						ref={emailInputRef}
+						// ref={emailInputRef}
 						placeholder={"Логін"}
 						value={inputsState.login}
 						// autoFocus
