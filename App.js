@@ -28,20 +28,7 @@ import { styles } from "./AppStyles";
 
 import { BtnLogout } from "./src/components/btns/BtnLogout";
 
-// import { StateContext } from "./src/utils/inputsContext";
-
-import { InputsContextContainer } from "./src/utils/inputsContextContainer";
-
-// const inputsInitialState = {
-// 	inputs: {
-// 		loginInput: "",
-// 		emailInput: "",
-// 		passwordInput: "",
-// 	},
-// 	login: "",
-// 	email: "",
-// 	password: "",
-// };
+import { InputsContextContainer } from "./src/utils/InputsContextContainer";
 
 // Головний стек навігації
 const MainStack = createStackNavigator();
@@ -120,7 +107,6 @@ export default function App() {
 	}
 
 	return (
-		// <StateContext.Provider value={inputsInitialState}>
 		<InputsContextContainer>
 			<NavigationContainer>
 				<SafeAreaView style={{ flex: 1 }}>
@@ -129,6 +115,5 @@ export default function App() {
 				</SafeAreaView>
 			</NavigationContainer>
 		</InputsContextContainer>
-		// </StateContext.Provider>
 	);
 }

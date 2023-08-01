@@ -3,6 +3,10 @@ import { StyleSheet } from "react-native";
 const regImgHeight = 120;
 
 export const styles = StyleSheet.create({
+	focusManager: {
+		width: "100%",
+	},
+
 	form: {
 		width: "100%",
 		paddingLeft: 16,
@@ -12,6 +16,8 @@ export const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,
+
+		justifyContent: "flex-end",
 	},
 
 	regImageContainer: {
@@ -54,7 +60,7 @@ export const styles = StyleSheet.create({
 	},
 
 	inputsWrapper: {
-		width: "100%",
+		// width: "100%",
 	},
 
 	input: {

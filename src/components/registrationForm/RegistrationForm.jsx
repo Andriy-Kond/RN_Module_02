@@ -1,21 +1,27 @@
-import { useState, useContext, useCallback, useRef } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useContext, useRef, useCallback } from "react";
+import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
+import Svg, { Circle, Path } from "react-native-svg";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { styles } from "./LoginFormStyles.js";
+import { styles } from "./RegistrationFormStyles.js";
 import { BtnMain } from "../btns/BtnMain.jsx";
 import { BtnSecond } from "../btns/BtnSecond.jsx";
+import regEmptyImg from "../../img/reg_rectangle_grey.png";
 import { StateContext } from "../../utils/InputsContextContainer";
 import { FocusManager } from "../FocusManager.jsx";
 import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
 
-export default function LoginForm({ mainBtnText, secondBtnText }) {
+export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 	const navigation = useNavigation();
 	const { inputsState, dispatch } = useContext(StateContext);
 	const isKeyboardOpened = useKeyboardVisibility();
 
 	const onFocusChange = (name, isFocused) => {
 		dispatch({ type: "FOCUS_CHANGE", name, isFocused });
+	};
+
+	const setLogin = (login) => {
+		dispatch({ type: "LOGIN_CHANGE", login });
 	};
 
 	const setEmail = (email) => {
@@ -38,19 +44,37 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 		}, [])
 	);
 
-	// submit login
-	const submitLogin = () => {
-		// логіка перевірки email і пароля
-		// Якщо дані вірні то перехід на HomeScreen
-		dispatch({ type: "SUBMIT", inputsInitialState });
+	// submit registration
+	const submitRegistration = () => {
+		dispatch({ type: "SUBMIT" });
 		navigation.navigate("Home", { screen: "Posts" });
-		// if (email === "example@example.com" && password === "password") {
-		// }
 	};
 
 	return (
 		<View style={styles.form}>
-			<Text style={styles.formTitle}>Увійти</Text>
+			<View style={styles.regImageContainer}>
+				<Image style={styles.regEmptyImg} source={regEmptyImg} />
+
+				<TouchableOpacity
+					style={[styles.regAddImgBtn]}
+					onPress={() => console.log("Button regAddImgBtn pressed")}>
+					<Svg
+						width="25"
+						height="25"
+						viewBox="0 0 25 25"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg">
+						<Circle cx="12.5" cy="12.5" r="12" fill="#fff" stroke="#FF6C00" />
+						<Path
+							fillRule="evenodd"
+							clipRule="evenodd"
+							d="M13 6H12V12H6V13H12V19H13V13H19V12H13V6Z"
+							fill="#FF6C00"
+						/>
+					</Svg>
+				</TouchableOpacity>
+			</View>
+			<Text style={styles.formTitle}>Реєстрація</Text>
 			<FocusManager styleFocusManager={styles.focusManager}>
 				<View
 					style={[
@@ -59,9 +83,22 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 					]}>
 					<TextInput
 						ref={emailInputRef}
+						placeholder={"Логін"}
+						value={inputsState.login}
+						// autoFocus
+						style={[
+							styles.input,
+							inputsState.inputs["loginInput"] ? styles.inputFocused : null,
+						]}
+						placeholderTextColor={"#BDBDBD"}
+						onChangeText={(text) => setLogin(text)}
+						onFocus={() => onFocusChange("loginInput", true)}
+						onBlur={() => onFocusChange("loginInput", false)}
+					/>
+
+					<TextInput
 						placeholder={"Адреса електронної пошти"}
 						value={inputsState.email}
-						// autoFocus
 						keyboardType="email-address"
 						style={[
 							styles.input,
@@ -89,28 +126,26 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 							onFocus={() => onFocusChange("passwordInput", true)}
 							onBlur={() => onFocusChange("passwordInput", false)}
 						/>
-
-						<TouchableOpacity
-							onPress={togglePasswordVisibility}
-							name="passwordBtn">
+						<TouchableOpacity onPress={togglePasswordVisibility}>
 							<Text style={styles.passwordToggleText}>
 								{showPassword ? "Приховати" : "Показати"}
 							</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
-
 				{!isKeyboardOpened && (
 					<>
 						<BtnMain
 							title={mainBtnText}
 							buttonStyle={styles.mainBtn}
-							onPress={() => submitLogin()}
+							onPress={() => submitRegistration()}
 						/>
 
 						<BtnSecond
 							title={secondBtnText}
-							onPress={() => navigation.navigate("Registration")}
+							onPress={() => {
+								navigation.navigate("Login");
+							}}
 						/>
 					</>
 				)}

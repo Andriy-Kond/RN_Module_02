@@ -11,7 +11,7 @@ import {
 import { styles } from "./RegistrationStyles.js";
 
 import bgPhotoImage from "../../img/bg_photo.jpg";
-import RegistrationForm from "../../components/registerForm/RegistrationForm.jsx";
+import RegistrationForm from "../../components/registrationForm/RegistrationForm.jsx";
 
 export default function Registration() {
 	const mainBtnText = "Зареєструватися";
@@ -20,7 +20,7 @@ export default function Registration() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<ScrollView contentContainerStyle={styles.scrollContainer}>
+				<View style={styles.registrationContainer}>
 					{/* фонове зображення */}
 					<Image
 						source={bgPhotoImage} // посилання на фонове зображення
@@ -28,16 +28,16 @@ export default function Registration() {
 						resizeMode="cover"
 					/>
 					{/* Обгортка для контролю за клавіатурою */}
-					<KeyboardAvoidingView
+					<KeyboardAvoidingView // уникнення перекриття контенту клавіатурою
 						// behavior={Platform.OS === "ios" ? "padding" : "height"}
-						style={styles.container}>
+						style={styles.keyboardContainer}>
 						{/* Форма з інпутами */}
 						<RegistrationForm
 							mainBtnText={mainBtnText}
 							secondBtnText={secondBtnText}
 						/>
 					</KeyboardAvoidingView>
-				</ScrollView>
+				</View>
 			</TouchableWithoutFeedback>
 		</>
 	);

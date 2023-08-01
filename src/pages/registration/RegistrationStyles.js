@@ -1,17 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-	scrollContainer: {
+	registrationContainer: {
 		flexGrow: 1,
-		// alignItems: "center",
-		// justifyContent: "center",
+		alignItems: "center",
+		justifyContent: "flex-end",
 	},
 
-	container: {
-		flex: 1,
-		justifyContent: "flex-end",
+	keyboardContainer: {
+		// flex: 1,
+		// justifyContent: "flex-end",
 		// alignItems: "center",
-		// width: "100%",
+		width: "100%",
 	},
 
 	imgBg: {

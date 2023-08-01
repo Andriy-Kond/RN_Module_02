@@ -18,25 +18,27 @@ export default function Login() {
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				{/* <ScrollView contentContainerStyle={styles.scrollContainer}> */}
 				{/* Обгортка для контролю за клавіатурою */}
-				<ScrollView contentContainerStyle={styles.scrollContainer}>
-					<KeyboardAvoidingView
-						style={styles.container}
-						// behavior={Platform.OS === "ios" ? "padding" : "height"}
-					>
-						{/* фонове зображення */}
-						<Image
-							source={bgPhotoImage} // посилання на фонове зображення
-							style={styles.imgBg}
-							resizeMode="cover"
-						/>
-						{/* Форма з інпутами */}
-						<LoginForm
-							mainBtnText={mainBtnText}
-							secondBtnText={secondBtnText}
-						/>
-					</KeyboardAvoidingView>
-				</ScrollView>
+				<KeyboardAvoidingView
+					style={styles.container} // уникнення перекриття контенту клавіатурою
+
+					// behavior={Platform.OS === "ios" ? "padding" : "height"}
+				>
+					{/* фонове зображення */}
+					<Image
+						source={bgPhotoImage} // посилання на фонове зображення
+						style={styles.imgBg}
+						resizeMode="cover"
+					/>
+					{/* Форма з інпутами */}
+					<LoginForm
+						mainBtnText={mainBtnText}
+						secondBtnText={secondBtnText}
+						// style={styles.loginFormContainer}
+					/>
+				</KeyboardAvoidingView>
+				{/* </ScrollView> */}
 			</TouchableWithoutFeedback>
 		</>
 	);
