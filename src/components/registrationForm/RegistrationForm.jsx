@@ -37,13 +37,6 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 		setShowPassword(!showPassword);
 	};
 
-	// const emailInputRef = useRef(null);
-	// useFocusEffect(
-	// 	useCallback(() => {
-	// 		emailInputRef.current?.focus();
-	// 	}, [])
-	// );
-
 	// submit registration
 	const submitRegistration = () => {
 		dispatch({ type: "SUBMIT" });
@@ -75,81 +68,79 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 				</TouchableOpacity>
 			</View>
 			<Text style={styles.formTitle}>Реєстрація</Text>
-			<FocusManager styleFocusManager={styles.focusManager}>
+			{/* <FocusManager styleFocusManager={styles.focusManager}> */}
+			<View
+				style={[
+					styles.inputsWrapper,
+					isKeyboardOpened && { marginBottom: 16 },
+				]}>
+				<TextInput
+					// ref={emailInputRef}
+					placeholder={"Логін"}
+					value={inputsState.login}
+					autoFocus
+					style={[
+						styles.input,
+						inputsState.inputs["loginInput"] ? styles.inputFocused : null,
+					]}
+					placeholderTextColor={"#BDBDBD"}
+					onChangeText={(text) => setLogin(text)}
+					onFocus={() => onFocusChange("loginInput", true)}
+					onBlur={() => onFocusChange("loginInput", false)}
+				/>
+
+				<TextInput
+					placeholder={"Адреса електронної пошти"}
+					value={inputsState.email}
+					keyboardType="email-address"
+					style={[
+						styles.input,
+						inputsState.inputs["emailInput"] ? styles.inputFocused : null,
+					]}
+					placeholderTextColor={"#BDBDBD"}
+					onChangeText={(text) => setEmail(text)}
+					onFocus={() => onFocusChange("emailInput", true)}
+					onBlur={() => onFocusChange("emailInput", false)}
+				/>
+
 				<View
 					style={[
-						styles.inputsWrapper,
-						isKeyboardOpened && { marginBottom: 16 },
+						styles.input,
+						styles.passwordInputContainer,
+						inputsState.inputs["passwordInput"] ? styles.inputFocused : null,
 					]}>
 					<TextInput
-						// ref={emailInputRef}
-						placeholder={"Логін"}
-						value={inputsState.login}
-						// autoFocus
-						style={[
-							styles.input,
-							inputsState.inputs["loginInput"] ? styles.inputFocused : null,
-						]}
+						placeholder={"Пароль"}
+						value={inputsState.password}
+						style={styles.passwordInput}
 						placeholderTextColor={"#BDBDBD"}
-						onChangeText={(text) => setLogin(text)}
-						onFocus={() => onFocusChange("loginInput", true)}
-						onBlur={() => onFocusChange("loginInput", false)}
+						onChangeText={(text) => setPassword(text)}
+						secureTextEntry={!showPassword}
+						onFocus={() => onFocusChange("passwordInput", true)}
+						onBlur={() => onFocusChange("passwordInput", false)}
 					/>
-
-					<TextInput
-						placeholder={"Адреса електронної пошти"}
-						value={inputsState.email}
-						keyboardType="email-address"
-						style={[
-							styles.input,
-							inputsState.inputs["emailInput"] ? styles.inputFocused : null,
-						]}
-						placeholderTextColor={"#BDBDBD"}
-						onChangeText={(text) => setEmail(text)}
-						onFocus={() => onFocusChange("emailInput", true)}
-						onBlur={() => onFocusChange("emailInput", false)}
-					/>
-
-					<View
-						style={[
-							styles.input,
-							styles.passwordInputContainer,
-							inputsState.inputs["passwordInput"] ? styles.inputFocused : null,
-						]}>
-						<TextInput
-							placeholder={"Пароль"}
-							value={inputsState.password}
-							style={styles.passwordInput}
-							placeholderTextColor={"#BDBDBD"}
-							onChangeText={(text) => setPassword(text)}
-							secureTextEntry={!showPassword}
-							onFocus={() => onFocusChange("passwordInput", true)}
-							onBlur={() => onFocusChange("passwordInput", false)}
-						/>
-						<TouchableOpacity onPress={togglePasswordVisibility}>
-							<Text style={styles.passwordToggleText}>
-								{showPassword ? "Приховати" : "Показати"}
-							</Text>
-						</TouchableOpacity>
-					</View>
+					<TouchableOpacity onPress={togglePasswordVisibility}>
+						<Text style={styles.passwordToggleText}>
+							{showPassword ? "Приховати" : "Показати"}
+						</Text>
+					</TouchableOpacity>
 				</View>
-				{!isKeyboardOpened && (
-					<>
-						<BtnMain
-							title={mainBtnText}
-							buttonStyle={styles.mainBtn}
-							onPress={() => submitRegistration()}
-						/>
+			</View>
+			{!isKeyboardOpened && (
+				<>
+					<BtnMain
+						title={mainBtnText}
+						buttonStyle={styles.mainBtn}
+						onPress={() => submitRegistration()}
+					/>
 
-						<BtnSecond
-							title={secondBtnText}
-							onPress={() => {
-								navigation.navigate("Login");
-							}}
-						/>
-					</>
-				)}
-			</FocusManager>
+					<BtnSecond
+						title={secondBtnText}
+						onPress={() => navigation.navigate("Login")}
+					/>
+				</>
+			)}
+			{/* </FocusManager> */}
 		</View>
 	);
 }

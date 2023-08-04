@@ -22,16 +22,17 @@ import Map from "./src/pages/map/Map";
 import Posts from "./src/pages/posts/Posts";
 import Profile from "./src/pages/profile/Profile";
 import Registration from "./src/pages/registration/Registration";
+
+// Components
+import { InputsContextContainer } from "./src/utils/InputsContextContainer";
 import { BtnGoBack } from "./src/components/btns/BtnGoBack";
+import { BtnLogout } from "./src/components/btns/BtnLogout";
 
 import { styles } from "./AppStyles";
 
-import { BtnLogout } from "./src/components/btns/BtnLogout";
-
-import { InputsContextContainer } from "./src/utils/InputsContextContainer";
-
-// Головний стек навігації
 const MainStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
 const MainStackNavigator = () => {
 	return (
 		<MainStack.Navigator
@@ -54,8 +55,6 @@ const MainStackNavigator = () => {
 	);
 };
 
-// Екран Bottom Tab навігації
-const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
 	return (
 		<Tab.Navigator
@@ -109,8 +108,8 @@ export default function App() {
 	return (
 		<InputsContextContainer>
 			<NavigationContainer>
+				<StatusBar />
 				<SafeAreaView style={{ flex: 1 }}>
-					<StatusBar />
 					<MainStackNavigator />
 				</SafeAreaView>
 			</NavigationContainer>

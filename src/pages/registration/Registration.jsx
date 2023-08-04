@@ -29,7 +29,7 @@ export default function Registration() {
 					/>
 					{/* Обгортка для контролю за клавіатурою */}
 					<KeyboardAvoidingView // уникнення перекриття контенту клавіатурою
-						// behavior={Platform.OS === "ios" ? "padding" : "height"}
+						behavior={Platform.OS === "ios" && "padding"}
 						style={styles.keyboardContainer}>
 						{/* Форма з інпутами */}
 						<RegistrationForm

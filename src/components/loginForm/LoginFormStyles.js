@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-	focusManager: {
-		width: "100%",
-	},
+	// focusManager: {
+	// 	width: "100%",
+	// },
 
 	form: {
 		width: "100%",
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
 	},
 
 	inputsWrapper: {
-		// width: "100%",
+		width: "100%",
 	},
 
 	input: {

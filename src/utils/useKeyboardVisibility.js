@@ -1,6 +1,7 @@
 const { useState, useEffect } = require("react");
 const { Keyboard } = require("react-native");
 
+// remove "flickering" when switching input focus
 export const useKeyboardVisibility = () => {
 	// keyboard visibility control
 	const [keyboardVisible, setKeyboardVisible] = useState(false);

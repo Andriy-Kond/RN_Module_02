@@ -5,6 +5,7 @@ export const inputsReducer = (state, action) => {
 		case "FOCUS_CHANGE":
 			return {
 				...state,
+				focus: action.isFocused,
 				inputs: {
 					...state.inputs,
 					[action.name]: action.isFocused,

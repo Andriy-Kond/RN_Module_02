@@ -22,9 +22,7 @@ export default function Login() {
 				{/* Обгортка для контролю за клавіатурою */}
 				<KeyboardAvoidingView
 					style={styles.container} // уникнення перекриття контенту клавіатурою
-
-					// behavior={Platform.OS === "ios" ? "padding" : "height"}
-				>
+					behavior={Platform.OS === "ios" && "padding"}>
 					{/* фонове зображення */}
 					<Image
 						source={bgPhotoImage} // посилання на фонове зображення
