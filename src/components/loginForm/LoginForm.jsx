@@ -1,18 +1,12 @@
-import { useState, useContext, useCallback, useRef, useEffect } from "react";
-import {
-	Text,
-	View,
-	TextInput,
-	TouchableOpacity,
-	Keyboard,
-} from "react-native";
+import { useState, useContext } from "react";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./LoginFormStyles.js";
 import { BtnMain } from "../btns/BtnMain.jsx";
 import { BtnSecond } from "../btns/BtnSecond.jsx";
 import { StateContext } from "../../utils/InputsContextContainer";
-import { FocusManager } from "../FocusManager.jsx";
+
 import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
 
 export default function LoginForm({ mainBtnText, secondBtnText }) {
@@ -51,7 +45,7 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 	return (
 		<View style={styles.form}>
 			<Text style={styles.formTitle}>Увійти</Text>
-			{/* <FocusManager styleFocusManager={styles.focusManager}> */}
+
 			<View
 				style={[
 					styles.inputsWrapper,

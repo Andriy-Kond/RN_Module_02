@@ -1,20 +1,21 @@
-import React, { useState, useContext, useRef, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./RegistrationFormStyles.js";
 import { BtnMain } from "../btns/BtnMain.jsx";
 import { BtnSecond } from "../btns/BtnSecond.jsx";
 import regEmptyImg from "../../img/reg_rectangle_grey.png";
 import { StateContext } from "../../utils/InputsContextContainer";
-import { FocusManager } from "../FocusManager.jsx";
+
 import { useKeyboardVisibility } from "../../utils/useKeyboardVisibility.js";
 
 export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 	const navigation = useNavigation();
 	const { inputsState, dispatch } = useContext(StateContext);
 	const isKeyboardOpened = useKeyboardVisibility();
+	const [showPassword, setShowPassword] = useState(false);
 
 	const onFocusChange = (name, isFocused) => {
 		dispatch({ type: "FOCUS_CHANGE", name, isFocused });
@@ -32,7 +33,6 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 		dispatch({ type: "PASSWORD_CHANGE", password });
 	};
 
-	const [showPassword, setShowPassword] = useState(false);
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
@@ -68,14 +68,13 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 				</TouchableOpacity>
 			</View>
 			<Text style={styles.formTitle}>Реєстрація</Text>
-			{/* <FocusManager styleFocusManager={styles.focusManager}> */}
+
 			<View
 				style={[
 					styles.inputsWrapper,
 					isKeyboardOpened && { marginBottom: 16 },
 				]}>
 				<TextInput
-					// ref={emailInputRef}
 					placeholder={"Логін"}
 					value={inputsState.login}
 					autoFocus
@@ -140,7 +139,6 @@ export default function RegistrationForm({ mainBtnText, secondBtnText }) {
 					/>
 				</>
 			)}
-			{/* </FocusManager> */}
 		</View>
 	);
 }

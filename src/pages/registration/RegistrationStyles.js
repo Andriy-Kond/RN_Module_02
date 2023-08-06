@@ -8,16 +8,12 @@ export const styles = StyleSheet.create({
 	},
 
 	keyboardContainer: {
-		// flex: 1,
-		// justifyContent: "flex-end",
-		// alignItems: "center",
 		width: "100%",
 	},
 
 	imgBg: {
 		flex: 1,
 		resizeMode: "cover",
-		// justifyContent: "flex-end",
 		position: "absolute",
 		top: 0,
 		left: 0,
