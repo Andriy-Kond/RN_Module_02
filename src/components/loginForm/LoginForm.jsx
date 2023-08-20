@@ -13,7 +13,7 @@ export default function LoginForm({ mainBtnText, secondBtnText }) {
 	const navigation = useNavigation();
 	const { inputsState, dispatch } = useContext(StateContext);
 
-	const isKeyboardOpened = useKeyboardVisibility(); //
+	const isKeyboardOpened = useKeyboardVisibility();
 
 	const onFocusChange = (name, isFocused) => {
 		dispatch({ type: "FOCUS_CHANGE", name, isFocused });
